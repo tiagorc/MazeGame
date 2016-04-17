@@ -1,4 +1,4 @@
-module MovementsStack (MovementsStack, backToBeginning, addNewMovement, removeMovement, convertListToStack) where
+module MovementStack (MovementsStack, backToBeginning, addNewMovement, removeMovement, convertListToStack) where
 
 import Position (position)
 
