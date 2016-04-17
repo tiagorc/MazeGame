@@ -4,6 +4,7 @@ import BuildMaze (maze)
 import System.IO
 import System.Exit
 import Control.Monad
+import MovementStack
 
 main = do
   putStrLn "\n1 - Play"
@@ -19,4 +20,8 @@ readChoice = hSetBuffering stdin NoBuffering >> hSetEcho stdin False >> getChar
 
 menuAction 'p' = putStrLn "\nHello, world!"
 menuAction 'm' = main
+menuAction 'w' = putStrLn "\nGoing UP"
+menuAction 's' = putStrLn "\nGoing DOWN"
+menuAction 'a' = putStrLn "\nGoing LEFT"
+menuAction 'd' = putStrLn "\nGoing RIGHT"
 menuAction _ = hPutStrLn stderr "\nInvalid choice."
