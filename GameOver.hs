@@ -19,20 +19,21 @@ getTimeFromStringDate stringDate = do
   [hours,minutes]
 
 -- gameOverConditions ::(savedHour) (actualHour)
--- gameOverConditions (h1:m1) (h2:m2) = do
---  if (read h1 :: Int) == (read h2 :: Int)
---  then return True
---  print m1
+gameOverConditions (h1:m1) (h2:m2) = do
+  let hoursRemaning = (read h1 :: Int) - (read h2 :: Int)
+  let minutesRemaning = (read (head m1) :: Int) - (read (head m2) :: Int)
+  let result = hoursRemaning * 60 + minutesRemaning
+  if result < 0
+  then True
+  else False
 
 -- Public ?
 setTimer = do
   putStr "Informe tempo de jogo(minutos):"
   timeGame <- readLn::IO Integer
   do{putStr "Tempo setado: ";print timeGame;}
-
   currentTime <- getCurrentTime
   let time = configTimerWith timeGame currentTime
-
   do{putStr "Timer setted with success\n"}
   saveTime (show time)
 
@@ -41,8 +42,7 @@ isGameOver = do
   let savedTimeList = getTimeFromStringDate savedTime
   currentTime <- getCurrentTime
   let currentTimeList = getTimeFromStringDate (show currentTime)
---  if (savedTimeList ) == show currentTime
---  then putStr "Time Over\n"
---  else putStr "Time not Over\n"
-  do {putStr "Saved Time: "; print savedTimeList;}
-  do {putStr "Now Time: "; print currentTimeList;}
+--  do {putStr "Saved Time: "; print savedTimeList;}
+--  do {putStr "Now Time: "; print currentTimeList;}
+  let result = gameOverConditions savedTimeList currentTimeList
+  return result
