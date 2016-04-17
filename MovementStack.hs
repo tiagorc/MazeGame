@@ -1,7 +1,5 @@
 module MovementsStack (MovementsStack, backToBeginning, addNewMovement, removeMovement, convertListToStack) where
 
-import Position (position)
-
 data MovementsStack position = EmptyStack | MovementsStack [position]
   deriving (Eq, Show)
 
