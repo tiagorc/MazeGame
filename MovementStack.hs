@@ -1,22 +1,22 @@
 module MovementsStack (MovementsStack, backToBeginning, addNewMovement, removeMovement, convertListToStack) where
 
-import Position
+import Position (position)
 
-data MovementsStack p = EmptyStack | MovementsStack [p]
+data MovementsStack position = EmptyStack | MovementsStack [position]
   deriving (Eq, Show)
 
-backToBeginning :: MovementsStack p -> MovementsStack p
+backToBeginning :: MovementsStack position -> MovementsStack position
 backToBeginning _ = EmptyStack
 
-addNewMovement :: p -> MovementsStack p -> MovementsStack p
-addNewMovement valor (EmptyStack) = MovementsStack[valor]
-addNewMovement valor (MovementsStack []) = MovementsStack[valor]
-addNewMovement valor (MovementsStack complement) = MovementsStack(valor:complement)
+addNewMovement :: position -> MovementsStack position -> MovementsStack position
+addNewMovement value (EmptyStack) = MovementsStack[value]
+addNewMovement value (MovementsStack []) = MovementsStack[value]
+addNewMovement value (MovementsStack complement) = MovementsStack(value:complement)
 
-removeMovement :: MovementsStack p -> MovementsStack p
+removeMovement :: MovementsStack position -> MovementsStack position
 removeMovement (EmptyStack) = error "Voce ja esta no inicio do jogo"
 removeMovement (MovementsStack []) = error "Voce ja esta no inicio do jogo"
 removeMovement (MovementsStack(x:y)) = MovementsStack y
 
-convertListToStack :: [p] -> MovementsStack p
+convertListToStack :: [position] -> MovementsStack position
 convertListToStack list = MovementsStack list
