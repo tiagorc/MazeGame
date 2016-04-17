@@ -1,4 +1,4 @@
-module MovementStack (MovementsStack, backToBeginning, addNewMovement, removeMovement, convertListToStack) where
+module MovementStack (MovementsStack, backToBeginning, addNewMovement, removeMovement, convertListToStack, mapMovement) where
 
 data MovementsStack position = EmptyStack | MovementsStack [position]
   deriving (Eq, Show)
@@ -18,3 +18,13 @@ removeMovement (MovementsStack(x:y)) = MovementsStack y
 
 convertListToStack :: [position] -> MovementsStack position
 convertListToStack list = MovementsStack list
+
+--mapMovement :: Char -> String
+--mapMovement direction (EmptyStack) = MovementStack [d]
+--mapMovement direction (MovementStack []) = MovementStack [d]
+mapMovement direction
+  | direction == 'w' = putStrLn "\nfoi pra cima"
+  | direction == 's' = putStrLn "\nfoi pra baixo"
+  | direction == 'a' = putStrLn "\nfoi para a esquerda"
+  | direction == 'd' = putStrLn "\nfoi para a direita"
+  | otherwise = error "\nMovimento Invalido!"
