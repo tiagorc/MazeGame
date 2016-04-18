@@ -27,4 +27,5 @@ mapMovement direction
   | direction == 's' = (0,-1)
   | direction == 'a' = (-1,0)
   | direction == 'd' = (1,0)
+  | direction == 'm' = (-1,-1)
   | otherwise = (0,0)

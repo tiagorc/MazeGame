@@ -6,13 +6,15 @@ import System.Exit
 import Control.Monad
 import ManageMovement (isValid)
 
+
 playFlow = do
   printMaze
   printMenu
   choise <- getChar
   let increment = menuAction choise
-  print increment
-  playFlow
+  if increment == (-1,-1)
+  then main
+  else playFlow
 
 main = do
   putStrLn "\n1 - Play"
