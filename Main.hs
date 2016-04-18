@@ -11,8 +11,10 @@ main = do
   putStrLn "2 - Quit\n"
   choice <- getLine
   if choice == "1"
-  then forever (printMenu >> readChoice >>= isValid)
+  then forever (printMaze >> printMenu >> readChoice >>= isValid)
   else exitSuccess
+
+printMaze = print maze
 
 printMenu = putStr "Enter the coordinate: \n(m) - Return"
 
