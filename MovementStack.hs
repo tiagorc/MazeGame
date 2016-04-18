@@ -27,4 +27,4 @@ mapMovement direction
   | direction == 's' = (0,-1)
   | direction == 'a' = (-1,0)
   | direction == 'd' = (1,0)
---  | otherwise = Left "Movimento invalido"
+  | otherwise = (0,0)

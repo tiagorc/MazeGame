@@ -6,22 +6,20 @@ import System.Exit
 import Control.Monad
 import ManageMovement (isValid)
 
---forever (printMaze >> printMenu >> readChoice >>= menuAction)
-
-printAndGetMenuChoise = do
+playFlow = do
   printMaze
---  printMenu
+  printMenu
   choise <- getChar
   let increment = menuAction choise
-  printAndGetMenuChoise
-
+  print increment
+  playFlow
 
 main = do
   putStrLn "\n1 - Play"
   putStrLn "2 - Quit\n"
   choice <- getLine
   if choice == "1"
-  then printAndGetMenuChoise
+  then playFlow
   else exitSuccess
   main
 
@@ -36,7 +34,10 @@ readChoice = hSetBuffering stdin NoBuffering >> hSetEcho stdin False >> getChar
 menuAction direction = isValid direction
 
 
---menuAction 'w' = isValid 'w'
---menuAction 's' = isValid 's'
---menuAction 'a' = isValid 'a'
---menuAction 'd' = isValid 'd'
+{- menuAction 'p' = putStrLn "\nHello, world!"
+menuAction 'm' = main
+menuAction 'w' = isValid 'w'
+menuAction 's' = isValid 's'
+menuAction 'a' = isValid 'a'
+menuAction 'd' = isValid 'd'
+menuAction _ = isValid 'e' -}
