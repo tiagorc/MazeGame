@@ -6,21 +6,17 @@ import System.Exit
 import Control.Monad
 import ManageMovement (isValid)
 
-sumTuples :: (Integer,Integer) -> (Integer,Integer) -> (Integer,Integer)
-sumTuples (x1,y1) (x2,y2) = (x1+x2,y1+y2)
-
-playFlow actualPositionList = do
+playFlow (h:t) = do
   printMaze
   printMenu
-  choise <- getChar
+  choise <- readChoice
   let increment = menuAction choise
-  let position = actualPositionList !! 0
-  if increment == (-1,-1)
-  then main
-  else do {
---    sumTuples position increment
-    playFlow actualPositionList
-    }
+  let position = h
+  when (increment == (-1,-1)) $ main
+  let first = (fst position) + (fst increment)
+  let second = (snd position) + (snd increment)
+  let tupleFormat = (first,second)
+  playFlow [tupleFormat]
 
 main = do
   putStrLn "\n1 - Play"
@@ -38,15 +34,4 @@ printMenu = putStr "Enter the coordinate: \n(m) - Return\n"
 
 readChoice = hSetBuffering stdin NoBuffering >> hSetEcho stdin False >> getChar
 
---menuAction :: Maybe Char -> Maybe (Integer,Integer)
---menuAction 'm' = main
 menuAction direction = isValid direction
-
-
-{- menuAction 'p' = putStrLn "\nHello, world!"
-menuAction 'm' = main
-menuAction 'w' = isValid 'w'
-menuAction 's' = isValid 's'
-menuAction 'a' = isValid 'a'
-menuAction 'd' = isValid 'd'
-menuAction _ = isValid 'e' -}
