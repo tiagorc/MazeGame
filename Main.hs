@@ -1,6 +1,6 @@
 module Main where
 
-import BuildMaze (maze)
+import BuildMaze (getMazeMap)
 import System.IO
 import System.Exit
 import Control.Monad
@@ -28,7 +28,9 @@ main = do
   else exitSuccess
   main
 
-printMaze = print maze
+printMaze =  do
+  mazeMap <- getMazeMap
+  print mazeMap
 
 printMenu = putStr "Enter the coordinate: \n(m) - Return\n"
 

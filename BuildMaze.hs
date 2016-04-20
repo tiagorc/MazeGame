@@ -1,4 +1,4 @@
-module BuildMaze(maze) where
+module BuildMaze(getMazeMap) where
 
 import Data.Matrix
 import Data.Char (digitToInt)
@@ -8,22 +8,26 @@ import Data.List.Split
 -- 1 => Obstaculo
 -- 2 => ponto inicial
 -- 3 => ponto final
-maze = fromList 3 4 [1,0,0,0,2,0,0,0,1,0,0,3]
+maze intList = fromList 3 4 intList
+
+getMazeMap = do
+  intList <- getIntMap
+  let mazeMap = maze intList
+  return mazeMap
 
 startPoint = (2,1)
 endPoint = (3,4)
 
-cvrtStrListToInt = do
-  str <- (readFile ".maze")
-  let strList = init (splitOneOf "\n " str)
-  let intList = map (read::String->Int) strList
-  return intList
+cvrStrToInt str = read str::Int
 
-{-maze = do
-  str <- (readFile ".maze")
+cvrStrListToIntList [] returnList = returnList
+cvrStrListToIntList (h:t) returnList =  do
+  let newInt = cvrStrToInt h
+  let newList = returnList ++ [newInt]
+  cvrStrListToIntList t newList
+
+getIntMap = do
+  str <- readFile ".maze"
   let strList = init (splitOneOf "\n " str)
-  print strList
-  let intList = map (read::String->Int) strList
-  print intList
---  fromList 3 4 (>>= intList)
--}
+  let map = cvrStrListToIntList strList []
+  return map
