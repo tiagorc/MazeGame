@@ -8,6 +8,7 @@ import Control.Monad
 import ManageMovement (isValid)
 
 playFlow (h:t) = do
+-- TODO: Clean all screen before print Maze
   printMaze
   printMenu
   choise <- readChoice
@@ -18,6 +19,8 @@ playFlow (h:t) = do
   let first = (fst position) + (fst increment)
   let second = (snd position) + (snd increment)
   let newPosition = (fromInteger first ,fromInteger second)
+-- TODO: Make validation of movement
+-- TODO2: Refactor this function
 
 -- insert player in Map
   print newPosition
