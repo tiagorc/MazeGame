@@ -1,6 +1,7 @@
 module Main where
 
-import BuildMaze (getMazeMap)
+import BuildMaze (getMazeMap,setMazeMap)
+import Data.Matrix
 import System.IO
 import System.Exit
 import Control.Monad
@@ -13,10 +14,19 @@ playFlow (h:t) = do
   let increment = menuAction choise
   let position = h
   when (increment == (-1,-1)) $ main
+
   let first = (fst position) + (fst increment)
   let second = (snd position) + (snd increment)
-  let tupleFormat = (first,second)
-  playFlow [tupleFormat]
+  let tupleFormat = (fromInteger first ,fromInteger second)
+
+-- insert player in Map
+  print tupleFormat
+  mazeMap <- getMazeMap
+  let newMazeMap = setElem 0 tupleFormat mazeMap
+
+-- save map
+  setMazeMap newMazeMap
+  playFlow [(first,second)]
 
 main = do
   putStrLn "\n1 - Play"
