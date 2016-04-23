@@ -23,9 +23,9 @@ mapMovement :: Char -> (Integer,Integer)
 --mapMovement direction (EmptyStack) = MovementStack [d]
 --mapMovement direction (MovementStack []) = MovementStack [d]
 mapMovement direction
-  | direction == 'w' = (0,1)
-  | direction == 's' = (0,-1)
-  | direction == 'a' = (-1,0)
-  | direction == 'd' = (1,0)
+  | direction == 'w' = (-1,0)
+  | direction == 's' = (1,0)
+  | direction == 'a' = (0,-1)
+  | direction == 'd' = (0,1)
   | direction == 'm' = (-1,-1)
   | otherwise = (0,0)

@@ -1,4 +1,4 @@
-module BuildMaze(getMazeMap,setMazeMap) where
+module BuildMaze(getMazeMap,setMazeMap,getReferenceMap) where
 
 import Data.Matrix
 import Data.Char (digitToInt)
@@ -13,7 +13,12 @@ import System.Process
 maze intList = fromList 3 4 intList
 
 getMazeMap = do
-  intList <- getIntMap
+  intList <- getIntMap ".map"
+  let mazeMap = maze intList
+  return mazeMap
+
+getReferenceMap = do
+  intList <- getIntMap ".referenceMap"
   let mazeMap = maze intList
   return mazeMap
 
@@ -22,8 +27,8 @@ endPoint = (3,4)
 
 -----
 
-getIntMap = do
-  str <- readFile ".maze"
+getIntMap fileName= do
+  str <- readFile fileName
   let strList = init (splitOneOf "\n " str)
   let map = cvrStrListToIntList strList []
   return map

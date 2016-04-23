@@ -1,6 +1,6 @@
 module Main where
 
-import BuildMaze (getMazeMap,setMazeMap)
+import BuildMaze (getMazeMap,setMazeMap,getReferenceMap)
 import Data.Matrix
 import System.IO
 import System.Exit
@@ -17,23 +17,30 @@ playFlow (h:t) = do
 
   let first = (fst position) + (fst increment)
   let second = (snd position) + (snd increment)
-  let tupleFormat = (fromInteger first ,fromInteger second)
+  let newPosition = (fromInteger first ,fromInteger second)
 
 -- insert player in Map
-  print tupleFormat
+  print newPosition
   mazeMap <- getMazeMap
-  let newMazeMap = setElem 0 tupleFormat mazeMap
+  let newMazeMap = setElem 4 newPosition mazeMap
+
+-- put old value back
+  let oldPosition = (fromInteger (fst position) ,fromInteger (snd position))
+  referenceMap <- getReferenceMap
+  let oldElem = getElem (fromInteger (fst position)) (fromInteger (snd position)) referenceMap
+  let reconfiguredMazeMap = setElem oldElem oldPosition newMazeMap
 
 -- save map
-  setMazeMap newMazeMap
+  setMazeMap reconfiguredMazeMap
   playFlow [(first,second)]
 
 main = do
   putStrLn "\n1 - Play"
   putStrLn "2 - Quit\n"
   choice <- getLine
+  -- TODO: Put player in start point
   if choice == "1"
-  -- Put a list here in place of (1,1)
+  -- TODO: Change [(1,1)] for [startPoint]
   then playFlow [(1,1)]
   else exitSuccess
   main
